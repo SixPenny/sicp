@@ -1,0 +1,52 @@
+## Exercise 1.9
+
+(define (+ a b)
+	(if (= a 0) b (inc (+ (dec a) b))))   recursive
+(define (+ a b)
+	(if (= a 0) b (+ (dec a) (inc b))))   iterative
+	
+## Exercise 1.10
+
+A(x,y)= 0  if y=0
+		2y if x=0
+		2  if y=1
+		A(x-1,A(x,y-1))  else
+f(n) = A(0,n) = 2n
+g(n) = A(1,n) = 2^n
+h(n) = A(2,n) = A(1 A(2,n-1)) = 2^(2^(n-1))
+A(3,n) = 2^(2^(2^(n-2)))
+
+## Exercise 1.11
+
+Recursive process:
+(define (f n) (if (< n 3) n 
+	(+ (f (- n 1)) 
+		(+ (* 2 (f (- n 2)))
+			(* 3 (f (- n 3)))))))
+
+Iterative process:			
+(define (f-i n) (if (< n 3) n 
+	(f-iter 2 1 0 n)))
+(define (f-iter n-1 n-2 n-3 count) (if (< count 3) n-1 (f-iter (+ (+ n-1 (* 2 n-2)) (* 3 n-3)) n-1 n-2 (- count 1))))
+
+计算(f 10000)需要很长时间(十几分钟没运算出来手动abort掉了) 
+计算(f-i 10000) 瞬间出结果
+
+
+## Exercise 1.12
+
+以x y表示第x行第y列 (y<=x)
+杨辉三角实际在pascal三角之前
+(define (yh-triangle x y) 
+	(cond ((= y 1) 1) 
+		((= x y) 1)
+		(else (+ (yh-triangle (- x 1) (- y 1)) (yh-triangle (- x 1) y)))
+	))
+
+	
+## Exercise 1.15
+a. 5次
+b. space theta(n) steps theta(n)
+
+
+## Exercise 1.16
