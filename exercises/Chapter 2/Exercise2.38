@@ -1,0 +1,1 @@
+op should satisfy that (= (op param1 param2) (op param2 param1)) 

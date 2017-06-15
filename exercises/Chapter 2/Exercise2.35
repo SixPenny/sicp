@@ -1,0 +1,4 @@
+(define (count-leaves t)
+(accumulate append nil (map (lambda (sub) (if (not (pair? sub)) (list sub) (count-leaves sub))) (reverse t))))
+(newline)
+(display (count-leaves (list (list 1 2) (list 3 4))))

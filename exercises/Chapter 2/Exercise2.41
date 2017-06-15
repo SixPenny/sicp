@@ -1,0 +1,13 @@
+(define (unique-triples n) 
+	(flatmap 
+		(lambda (i) 
+			(flatmap (lambda (j) 
+					(map (lambda (k) (list i j k)) 
+						(enumerate-interval 1 (- j 1)))) 
+			(enumerate-interval 1 (- i 1))))
+		(enumerate-interval 1 n)))
+(define (sum-is-s? triples s)
+	(= s (accumulate + 0 triples)))
+
+(define (triples-sum-s n s)
+	(filter (lambda (t) (sum-is-s? t s)) (unique-triples n)))
