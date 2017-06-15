@@ -1,0 +1,12 @@
+(define nil '())
+(define (reverse-r items)
+	(define (reverse-inner rest result)
+		(if (or (null? rest) (not (pair? rest)))
+			result
+			(reverse-inner (reverse-inner (cdr rest) nil) (cons (car rest) result))))
+	(reverse-inner items nil))
+	
+(define x (list (list 1 2) (list 3 4)))
+
+(newline)
+(display (reverse-r x))

@@ -1,0 +1,23 @@
+(define (make-rectangle width-segment height-segment)
+	(cons width-segment height-segment))
+	
+(define (perimeter rectangle) 
+	(double (+ (len (width-segment rectangle)) (len (height-segment rectangle)))))
+
+(define (double x) (* x 2))
+(define (width-segment rectangle) (car rectangle))
+(define (height-segment rectangle) (cdr rectangle))
+(define (len segment) (sqrt (+ (square (- (x-point (start-segment segment)) (x-point (end-segment segment)))) 
+							   (square (- (y-point (start-segment segment)) (y-point (end-segment segment))))
+							)))
+							
+(define (area rectangle) 
+	(* (len (width-segment rectangle)) (len (height-segment rectangle))))
+	
+(newline)
+(display (area (make-rectangle (make-segment (make-point 0 0) (make-point 0 7)) 
+	(make-segment (make-point 0 0) (make-point 8 0)))))
+
+(newline)
+(display (perimeter (make-rectangle (make-segment (make-point 0 0) (make-point 0 7)) 
+	(make-segment (make-point 0 0) (make-point 8 0)))))

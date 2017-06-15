@@ -1,0 +1,2 @@
+(define (make-center-percent c p)
+	(let ((p1 (/ p 100))) (make-interval (- c (* c p1)) (+ c (* c p1)))))

@@ -1,0 +1,11 @@
+(define (width interval) (halve (- (upper-bound interval) (lower-bound interval))))
+(define (halve x) (/ x 2))
+
+;; for sum
+
+(width (add-interval x y))
+= (width (make-interval (+ (lower-bound x) (lower-bound y))
+			(+ (upper-bound x) (upper-bound y))))
+= (halve (- (+ (upper-bound x) (upper-bound y)) (+ (lower-bound x) (lower-bound y))))
+= (halve (+ (- (upper-bound x) (lower-bound x)) (- (upper-bound y) (lower-bound y))))
+= (+ (width x) (width y))

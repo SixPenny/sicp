@@ -1,0 +1,5 @@
+;; Can't use if
+(define (for-each fun items)
+	(cond ((null? items) items)
+	 (else (fun (car items)) (for-each fun (cdr items)))
+))

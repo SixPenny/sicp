@@ -1,0 +1,5 @@
+(define (except-first-denomination items) (cdr items))
+(define (first-denomination) (car items))
+(define no-more? null?)
+
+不影响结果，但影响过程
