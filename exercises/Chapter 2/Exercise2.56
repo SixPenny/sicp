@@ -1,0 +1,11 @@
+(define (exponentiation? expression)
+	(and (pair? expression) (eq? (car expression) '**)))
+
+(define (base expression)
+	(cadr expression))
+(define (exponent expression)
+	(caddr expression))
+(define (make-exponentiation base exponent)
+	(let (exponent-1 (- exponent 1))
+		(cond ((= 0 exponent-1) 1)
+			  (else (list '* exponent ('** base exponent-1))))))

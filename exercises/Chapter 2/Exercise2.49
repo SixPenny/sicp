@@ -1,0 +1,31 @@
+a.
+(define (outline frame)
+	(let ((diagnal-point (add-vect (edge1-frame frame) (edge2-frame frame)))
+		  (segment1 (make-segment (make-vect 0 0) (edge1-frame frame)))
+		  (segment2 (make-segment (make-vect 0 0) (edge2-frame frame)))
+		  (segment3 (make-segment (edge1-frame frame) diagnal-point))
+		  (segment4 (make-segment (edge2-frame frame) diagnal-point)))
+		  (segment-list->painter (list segment1 segment2 segment3 segment4))))
+b.
+(define (outline frame)
+	(let ((diagnal-point (add-vect (edge1-frame frame) (edge2-frame frame)))
+		  (segment1 (make-segment (origin-frame frame) diagnal-point))
+		  (segment2 (make-segment (edge1-frame frame) (edge2-frame frame))))
+		  (segment-list->painter (list segment1 segment2))))
+c.
+(define (diamond frame)
+	(let ((half (/ 1 2))
+		  (midpoint1 (scale-vect half (+ (origin-frame frame) (edge1-frame frame))))
+		  (midpoint2 (scale-vect half (+ (origin-frame frame) (edge2-frame frame))))
+		  (midpoint3 (+ (origin-frame frame) (edge2-frame frame) midpoint1))
+		  (midpoint4 (+ (origin-frame frame) (edge1-frame frame) midpoint2)))
+		(segment-list->painter (make-segment midpoint1 midpoint2)
+			(make-segment midpoint2 midpoint3) (make-segment midpoint3 midpoint4)
+			(make-segment midpoint4 midpoint1))))
+d.
+; abstract method ,do something on the frame
+(define (wave pic frame origin-op edge1-op edg2-op)
+	(let ( newframe (make-frame (origin-op (origin-frame frame))
+		(edg1-op (edge1-frame frame))
+		(edg2-op (edge2-frame frame))))
+		(paint pic frame)))
