@@ -1,0 +1,10 @@
+element-of-set? do not change
+adjoin-set do not test element-of-set?
+union-set do not test element-of-set?
+intersection-set do not change
+
+
+non-duplicate representation is more effiency
+
+
+when adjoin-set and union-set use more 

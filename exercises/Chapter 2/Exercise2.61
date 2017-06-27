@@ -1,0 +1,6 @@
+(define (adjoin-set x set)
+    (define (adjoin-set-inner result x set)
+	    (cond ((null? set) (list x))
+	      ((< x (car set)) (cons x set))
+		  (else (adjoin-set-inner (append result (car set)) x (cdr set)))))
+	(adjoin-set-inner nil x set))

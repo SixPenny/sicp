@@ -1,0 +1,5 @@
+(define (union-set set1 set1)
+	(cond ((null? set1) set2)
+	      ((null? set2) set1)
+		  ((element-of-set? (car set2) set1) (union-set set1 (cdr set2)))
+		  (else (union-set (cons (car set2) set1) (cdr set2)))))
