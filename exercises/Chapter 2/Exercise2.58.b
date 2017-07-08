@@ -1,3 +1,7 @@
+;;没有更改算法，只改了selector，constructor
+;;先判断有没有+号，如果有则应用加法的微分
+;;再判断有没有*号，如果有再应用乘号的微分
+;;就是说优先级低的要先做微分运算
 (define (differentiation expression var)
 	(cond ((same-variable? expression var) 1)
 		  ((constant? expression var) 0)
@@ -18,18 +22,32 @@
 	(cond ((zero? x) y)
 		  ((zero? y) x)
 		  ((and (number? x) (number? y)) (+ x y))
-		  (else (list '+ x y))))
+		  (else (list x '+ y))))
 (define (make-product x y) 
 	(cond ((or (zero? x) (zero? y)) 0)
 		  ((=number? x 1) y)
 		  ((=number? y 1) x)
-		  (else (list '* x y))))
-(define (add? e) (eq? '+ (car e)))
-(define (product? e) (eq? '* (car e)))
-(define (adder e) (cadr e))
-(define (addee e) (caddr e))
-(define (multiplier e) (cadr e))
-(define (multipliee e) (caddr e))
+		  (else (list x '* y))))
+(define (add? e) 
+	(cond ((not (pair? e)) #f)
+		  ((eq? (car e) '+) #t)
+		  (else (add? (cdr e)))))
+(define (product? e) 
+	(cond ((add? e) #f)
+		  ((not (pair? e)) #f)
+		  ((eq? (car e) '*) #t)
+		  (else (product? (cdr e)))))
+
+
+(define (adder e) (car e))
+(define (addee e) 
+	(cond ((= (length e) 3) (caddr e))
+		  (else (cddr e))))
+(define (multiplier e) (car e))
+(define (multipliee e) 
+	(let ((m (caddr e)))
+		(cond ((not (pair? m)) (cddr e))
+			  (else m))))
  
 (define (exponentiation? e) (eq? '** (car e)))
 (define (base e) (cadr e))
@@ -38,3 +56,6 @@
 	(cond ((zero? exponent) 1)
 		  ((=number? exponent 1) base)
 		  (else (list '** base exponent))))
+
+(newline)
+(display (differentiation '(x + 3 * (x + y + 2)) 'x))
