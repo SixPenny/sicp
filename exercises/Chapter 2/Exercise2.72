@@ -1,0 +1,5 @@
+总共需要logn次递归，每次递归需要n/2^i查找
+因此复杂度为O(nlogn)
+
+least-frequent-steps : n
+most-frequent-steps : 1

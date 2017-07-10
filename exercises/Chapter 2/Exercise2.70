@@ -1,0 +1,9 @@
+;;(('A 2) ('GET 2) ...)
+(define lyric-tree (generate-huffman-tree (list (list 'A 2) (list 'GET 2) (list 'SHA 3) (list 'WAH 1) (list 'boom 1) (list 'JOB 2) 
+	(list 'NA 2) (list 'YIP 9))))
+	
+(display (encode (list 'Get 'a 'job 'Sha 'na 'na 'na 'na 'na 'na 'na 'na 'Get 'a 'job 'Sha 
+'na 'na 'na 'na 'na 'na 'na 'na 'Wah 'yip 'yip 'yip 'yip 'yip 'yip 'yip 'yip 'yip 'Sha 'boom) lyric-tree))
+
+total need:114bits
+fixed-length need: 4*36=144bits
