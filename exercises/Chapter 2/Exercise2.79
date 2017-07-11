@@ -1,0 +1,9 @@
+;; 分别在三个package中put进相关操作
+(put 'equ? '(scheme-number scheme-number)
+		(lambda (x y) (= x y)))
+		
+(put 'equ? '(rational rational) 
+		(lambda (x y) (and (= (number x) (number y)) (= (denom x) (denom y)))))
+		
+(put 'equ? '(complex complex) 
+		(lambda (x y) (and (= (real-part x) (real-part y)) (= (imag-part x) (imag-part y)))))

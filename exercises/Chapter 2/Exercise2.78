@@ -1,0 +1,10 @@
+(define (type-tag x) 
+	(cond ((number? x) x)
+		  ((pair? x) (car x))))
+		  
+(define (attach-tag type-tag contents)
+	(cond ((number? contents) contents)
+		  (else (cons type-tag contents))))
+(define (contents x)
+	(cond ((number? x) x)
+		  ((pair? x) (cdr x))))

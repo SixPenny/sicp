@@ -1,0 +1,9 @@
+;; 分别在三个package中put进相关操作
+(put '=zero? '(scheme-number scheme-number)
+		(lambda (x) (= x 0)))
+		
+(put '=zero? '(rational rational) 
+		(lambda (x) (and (= (number x) 0) (= (denom x) 0))))
+		
+(put '=zero? '(complex complex) 
+		(lambda (x) (and (= (real-part x) 0) (= (imag-part x) 0))))

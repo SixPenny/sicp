@@ -1,0 +1,19 @@
+(define (apply-generic op . args)
+	(let ((type-tags (map type-tag args)))
+		(let ((proc (get op type-tags)))
+			(if proc
+				(apply proc (map contents args))
+				(define (apply-after-convert to args)
+					(if (null? to) (error "can't convert params")
+						(let ((convertFun (map (convertTo (car to)) args)))
+						(if (= (length args) (filter filt convertFun)) convertFun
+							(apply-after-convert (cdr to) args)))))
+				(apply-generic op (maplist (apply-after-convert args args) args))
+				))))
+
+(define (maplist converts params)
+	(if (null? params) nil
+		(cons ((car converts) (car params)) (maplist (cdr converts params)))))
+(define (convertTo x) 
+	(lambda (y) (get-coercion y x)))
+(define (filt x) (if x #t #f))

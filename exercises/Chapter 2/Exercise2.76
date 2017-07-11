@@ -1,0 +1,5 @@
+explicit dispatch : 新增type时每个generic-operation都需要变动，新增operation时要将每个type都要考虑一遍
+data-directed : 新增type和新增operation只需将操作install到table中
+message-passing : 新增type需要新增dispatch，新增operation需要将每个dispatch都修改一遍
+
+相对来说data-directed style需要操心的事情更少
